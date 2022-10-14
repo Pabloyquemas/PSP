@@ -1,5 +1,6 @@
 package com.pgonrod.psp2022.ut02.ex02.data.remote.models
 
+import com.pgonrod.psp2022.ut02.ex01.data.remote.models.UserApiModel
 import com.pgonrod.psp2022.ut02.ex02.data.remote.ApiEndPoint
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,6 +31,16 @@ class RetrofitApiClientPlague {
         return if (response.isSuccessful){
             val users = response.body() //La respuesta del Gson estara en el body
             users ?: emptyList() // si es nulo me devuelve una lista vacia
+        } else {
+            emptyList()
+        }
+    }
+    fun getAlerts(): List<PlagueApiModel>{
+        val callstatus = apiEnPoint.getstatus() //Llamada
+        val responsestaus = callstatus.execute() //Ejecucion de la llamada
+        return if (responsestaus.isSuccessful){
+            val status = responsestaus.body()
+            status ?: emptyList<>()
         } else {
             emptyList()
         }

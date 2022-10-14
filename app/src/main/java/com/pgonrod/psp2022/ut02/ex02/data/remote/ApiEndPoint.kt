@@ -11,4 +11,7 @@ interface ApiEndPoint {
     @GET ("alerts")
     fun getAlert(): Call<List<PlagueApiModel>>
 
+    @GET("alerts/{statusCode}")
+    fun getstatus(@Path("statusCode") statusCode: Int): Call<UserApiModel>
+
 }
